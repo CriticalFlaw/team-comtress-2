@@ -51,6 +51,7 @@ private:
 	CTFImagePanel*					m_pResistPanel;
 	CUtlVector<vgui::ContinuousProgressBar*>	m_vecpChargeMeters;
 	Label*							m_pUberchargeLabel;
+	Label*							m_pUberchargeLabelShadow;
 	Label*							m_pUberchargeCountLabel;
 
 	bool m_bCharged;
@@ -120,7 +121,10 @@ void CHudMedicChargeMeter::ApplySchemeSettings( IScheme *pScheme )
 
 	m_pUberchargeLabel = dynamic_cast<Label*>( FindChildByName("ChargeLabel") );
 	Assert( m_pUberchargeLabel );
-
+	
+	m_pUberchargeLabelShadow = dynamic_cast<Label*>(FindChildByName("ChargeLabelShadow"));
+	Assert(m_pUberchargeLabelShadow);
+	
 	m_pUberchargeCountLabel = dynamic_cast<Label*>( FindChildByName("IndividualChargesLabel") );
 	Assert( m_pUberchargeCountLabel );
 	if( m_pUberchargeCountLabel )
@@ -338,6 +342,7 @@ void CHudMedicChargeMeter::UpdateControlVisibility()
 	if( m_pUberchargeLabel )
 	{
 		m_pUberchargeLabel->SetVisible( !bResistMedigun );
+		m_pUberchargeLabelShadow->SetVisible(!bResistMedigun);
 	}
 	if( m_pUberchargeCountLabel )
 	{
